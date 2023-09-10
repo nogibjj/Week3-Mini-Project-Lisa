@@ -3,8 +3,5 @@ Test goes here
 
 """
 
-from mylib.calculator import add
-
-
-def test_add():
+def test_analyze():
     assert add(1, 2) == 3
