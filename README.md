@@ -30,7 +30,8 @@ I created a scatterplot of the data based on the income and total spending, and 
 ![total](output/1_total.png)
 * The higher the income, the more money the customer will spend on the platform. The relationship is not linear, but exponential.
 * The higher the income, the larger the variance of the spending.
-* People who accept more offers are the ones with higher income and higher spendings
+* People who accept more offers are the ones with higher income and higher spending
+* There are several outliers (e.g. people with low income but spend a lot on the platform). And it is worthwhile to check these cases.
 
 ![total](output/2_wine.png)
 ![total](output/4_meat.png)
