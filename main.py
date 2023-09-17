@@ -1,36 +1,52 @@
-"""
-Main cli or app entry point
-"""
+import polars as pl
+import seaborn as sns
 
-import pandas as pd
-
-def analyze() -> pd.core.frame.DataFrame:
+def analyze() -> pl.DataFrame:
     '''
-    Function that analyze the csv file using pandas
+    Function that analyzes the csv file using polars
     '''
-    #read the csv file
-    marketing_data = pd.read_csv("data/ifood_df.csv")
+    # Read the csv file
+    marketing_data = pl.read_csv("mydata/ifood_df.csv")
 
-    #data manipulation
-    marketing_data['TotalSpending'] = marketing_data['MntWines'] + marketing_data['MntFruits'] + marketing_data['MntMeatProducts'] + marketing_data['MntFishProducts'] + marketing_data['MntSweetProducts']
-    marketing_data['AcceptedOffer'] = marketing_data['AcceptedCmp1'] + marketing_data['AcceptedCmp2'] + marketing_data['AcceptedCmp3'] + marketing_data['AcceptedCmp4'] + marketing_data['AcceptedCmp5']
-    marketing_data = marketing_data[['Income', 'TotalSpending', 'AcceptedOffer', 'MntWines', 'MntFruits', 'MntMeatProducts', 'MntFishProducts','MntSweetProducts']]
+    # Data manipulation
+    marketing_data = marketing_data.with_columns(
+        TotalSpending = 
+        pl.col("MntWines")
+        + pl.col("MntFruits")
+        + pl.col("MntMeatProducts")
+        + pl.col("MntFishProducts")
+        + pl.col("MntSweetProducts")
+    )
+    marketing_data = marketing_data.with_columns(
+        AcceptedOffer = 
+        pl.col("AcceptedCmp1")
+        + pl.col("AcceptedCmp2")
+        + pl.col("AcceptedCmp3")
+        + pl.col("AcceptedCmp4")
+        + pl.col("AcceptedCmp5")
+    )
+    marketing_data = marketing_data.select([
+        "Income",
+        "TotalSpending",
+        "AcceptedOffer",
+        "MntWines",
+        "MntFruits",
+        "MntMeatProducts",
+        "MntFishProducts",
+        "MntSweetProducts",
+    ])
     marketing_data.describe()
 
-    #data visualization
-    marketing_data.plot.scatter(x = 'Income', y = 'TotalSpending', c = 'AcceptedOffer', cmap='viridis')
-    marketing_data.plot.scatter(x = 'Income', y = 'MntWines', c = 'AcceptedOffer', cmap='viridis')
-    marketing_data.plot.scatter(x = 'Income', y = 'MntFruits', c = 'AcceptedOffer', cmap='viridis')
-    marketing_data.plot.scatter(x = 'Income', y = 'MntMeatProducts', c = 'AcceptedOffer', cmap='viridis')
-    marketing_data.plot.scatter(x = 'Income', y = 'MntFishProducts', c = 'AcceptedOffer', cmap='viridis') 
-    marketing_data.plot.scatter(x = 'Income', y = 'MntSweetProducts', c = 'AcceptedOffer', cmap='viridis')  
-    
-    #return the dataframe
+    # Data visualization
+    sns.scatterplot(data=marketing_data, x="Income", y="TotalSpending", hue="AcceptedOffer")
+    sns.scatterplot(data=marketing_data, x="Income", y="MntWines", hue="AcceptedOffer")
+    sns.scatterplot(data=marketing_data, x="Income", y="MntFruits", hue="AcceptedOffer")
+    sns.scatterplot(data=marketing_data, x="Income", y="MntMeatProducts", hue="AcceptedOffer")
+    sns.scatterplot(data=marketing_data, x="Income", y="MntFishProducts", hue="AcceptedOffer")
+    sns.scatterplot(data=marketing_data, x="Income", y="MntSweetProducts", hue="AcceptedOffer")
+    # Return the DataFrame
     return marketing_data
-  
-   
 
 
 if __name__ == "__main__":
-    # pylint: disable=no-value-for-parameter
     analyze()
