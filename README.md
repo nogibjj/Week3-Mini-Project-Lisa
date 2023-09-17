@@ -1,41 +1,14 @@
 [![CI](https://github.com/nogibjj/python-template/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/python-template/actions/workflows/cicd.yml)
-## Week 2: Pandas Descriptive Statistics Script
+## Week 3: Polars Descriptive Statistics Script
 
 ### Goal of the project:
-Write a Python script that practices Exploratory Data Analysis on a dataset using Pandas Library
+Write a Python script that practices Exploratory Data Analysis on a dataset using Polars Library
 
-### Information about the DataSet
-The dataset is a sample dataset from a food delivery platform, who collected 2240 customer's base information and interaction with the company.
-Below are the Columns:
-![column](mydata/dictionary.png)
-And you can learn more about the dataset from the [project GitHub link](https://github.com/nailson/ifood-data-business-analyst-test)
+### Report
+* Please check more information about the dataset at READ.md for mini-project-2
+* Please check the scatter plot 
 
-### Manipulate the Data
-I found I am very interested in the correlation between the customer's income, spending on the platform, and the offer they accepted. 
-* Loaded the data using pandas,
-* Created a new column with the total spending of the customer on the platform's product
-* Created a new column counting the total number of customers accepting an offer from the platform
-* Made a subset of the data with only the income, spending, and offer columns
-
-### Summary of the Data
-I use `df.describe()` to summarize the data, reading its mean, median, and standard deviation.
-![summary](output/summary.png)
-Here are something I found by looking at the data:
-* There are fewer people than I expected that accepted an offer
-* People spent more money on wine on this platform, than fruit, meat, fish and sweets added together
-* I don't know the unit for income. Because this is a company from Brazil, the currency might be the Brazilian Real instead of the US Dollar. However this information is not specified in the documentation of the data.
-
-### Visualize the Data
-I created a scatterplot of the data based on the income and total spending, and colored the plot with the number of accepted offer
-![total](output/1_total.png)
-* The higher the income, the more money the customer will spend on the platform. The relationship is not linear, but exponential.
-* The higher the income, the larger the variance of the spending.
-* People who accept more offers are the ones with higher income and higher spending
-* There are several outliers (e.g. people with low income but spend a lot on the platform). And it is worthwhile to check these cases.
-
-![total](output/2_wine.png)
-![total](output/4_meat.png)
-* I also found that, compared to other categories, spending on meat had less variance (the dots clustered closer). I think the reason behind it might be the requirement and price of meat have less variance, compared to other more luxury products.
-
-
-
+### Takeaways
+* I used AI to translate my code from Pandas directly to Polars. However, I found since the ChatGPT was only trained on data till 2021 when the latest Polars at that time was 0.9, but I wanted to use the current latest version of Polars, which is 0.19, I got error when adding new column to my data, and I have to manually change the syntax. When we use AI on fast growing coding language or libary, there is this shortcoming that
+* But I was still able to use 
+* For my project written in Pandas, I used pandas scatter plot function `df.plot.scatter`. But Polars does not have buil-in data visualizaiton feature, so I have to install another library Seaborn to do the plotting. Although Polars is faster than Pandas, 
